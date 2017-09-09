@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test0</title>
+</head>
+<body>
+  <div id="J_Box">Hello World</div>
+  <script id='J_Tpl' type="text/html">
+    <div class='container'>
+      <div class='title'><%= scope.title %></div>
+      <div class='content'><%- scope.content %></div>
+      <div class='footer'>
+        <% if (scope.footer) { %>
+          <span>say: hello world !</span>
+        <% } %>
+      </div>
+      <div class='component'><%@ scope.component %></div>
+      <div class='nothing'><%! scope.doNotDoAnything %></div>
+    </div>
+  </script>
+  <script src='../../dist/cc-template.js'></script>
+  <script>
+    var str = document.getElementById('J_Tpl').innerHTML;
+    var template = new cc.Template();
+    var compiled = template.compile(str);
+    var obj = {
+      title: '<haha></haha>',
+      content: '&#x27;oo&#x27;',
+      footer: true,
+      doNotDoAnything: '<h1>dangerous insert</h1>'
+    };
+    var html = compiled(obj);
+
+    document.getElementById('J_Box').innerHTML = html;
+  </script>
+</body>
+</html>

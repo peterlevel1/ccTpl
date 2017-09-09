@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test1</title>
+</head>
+<body>
+	<h3>the computing task of 100,000 times only cost </h3>
+	<h1 id="J_Result"></h1>
+
+	<script id="J_Tpl" type="text/html">
+		{{ for (var i = 0, len = it.data.length; i < len; i++) { }}
+		  <p> {{! it.data.text }} </p>
+    {{ } }}
+	</script>
+
+	<script src='../../dist/cc-template.js'></script>
+	<script>
+		var data = {
+			length: 100000,
+			text: 'hello world !'
+		};
+    var temp = new cc.Template({
+      scope: 'it',
+      regexpHead: '{{',
+      regexpTail: '}}',
+    });
+		var html = document.getElementById('J_Tpl').innerHTML;
+		var compiled = temp.compile(html);
+
+		var time = Date.now();
+    var result = compiled({ data: data });
+		time = Date.now() - time;
+
+		document.getElementById('J_Result').innerHTML = time + 'ms';
+	</script>
+</body>
+</html>
