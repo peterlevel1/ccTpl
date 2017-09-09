@@ -19,7 +19,8 @@
     "frontend template"
   ],
   "description": "a nice template which deserve your notice !",
-  "devDependencies": {},
+  "devDependencies": {
+    "cc-template": "^0.0.4"
+  },
   "dependencies": {}
 }
-
