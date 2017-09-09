@@ -109,7 +109,7 @@
       sign = match[1][0];
       content = match[1].slice(1).trim();
 
-      ret += '_ret += "' + str.slice(lastIndex, match.index).replace(/\n/g, '\\n') + '";\n';
+      ret += '_ret += "' + str.slice(lastIndex, match.index).replace(/\n/g, '\\n') + '";';
 
       switch (sign) {
         case '=':
@@ -132,7 +132,7 @@
       lastIndex = match.index + match[0].length;
     }
 
-    ret += '_ret += "' + str.slice(lastIndex).trim().replace(/\n/g, '') + '";\n';
+    ret += '_ret += "' + str.slice(lastIndex).replace(/\n/g, '\\n') + '";\n';
 
     ret += 'return _ret;\n';
 

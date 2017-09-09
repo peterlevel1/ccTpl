@@ -2,7 +2,7 @@
 
 ### a nice template which deserve your notice !
 ### it is an Embedded JavaScript templates.
-
+UVVsyvp5IYAUds0vAUqp3x821HE=
 ## Features
 
   * custom define the scope name `options.scope = 'theNameILike'`

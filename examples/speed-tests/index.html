@@ -504,19 +504,19 @@ ul
 
 <!-- cc-template  -->
 <script id="cc-template" type="text/tmpl">
-    <ul>
-        <% for (var i = 0, l = scope.list.length; i < l; i++) { %>
-            <li>User: <%= scope.list[i].user %> / Web Site: <%= scope.list[i].site %></li>
-        <% } %>
-    </ul>
+<ul>
+    <% for (var i = 0, l = scope.list.length; i < l; i++) { %>
+        <li>User: <%= scope.list[i].user %> / Web Site: <%= scope.list[i].site %></li>
+    <% } %>
+</ul>
 </script>
 
 <script id="cc-template-raw" type="text/tmpl">
-    <ul>
-        <% for (var i = 0, l = scope.list.length; i < l; i++) { %>
-            <li>User: <%! scope.list[i].user %> / Web Site: <%! scope.list[i].site %></li>
-        <% } %>
-    </ul>
+<ul>
+    <% for (var i = 0, l = scope.list.length; i < l; i++) { %>
+        <li>User: <%! scope.list[i].user %> / Web Site: <%! scope.list[i].site %></li>
+    <% } %>
+</ul>
 </script>
 
 <style>
