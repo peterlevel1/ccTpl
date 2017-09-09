@@ -1,0 +1,9 @@
+examples
+.vscode
+.git
+.svn
+npm-debug.log*
+node_modules
+.npm
+*.log
+.node_repl_history
