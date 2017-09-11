@@ -153,7 +153,7 @@
         }
 
         if (!ctx.unescape) {
-          ctx.escape = self.unescape;
+          ctx.unescape = self.unescape;
         }
       }
 
