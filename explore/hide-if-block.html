@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+</head>
+<body>
+  <!-- html -> js -> html ... -->
+  <div id="J_Box_1" data-event='click:handleClick'></div>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/html" id="T_Box_1">
+    <div id="container">
+      <h3>hello</h3>
+      <% if (scope.str) { %>
+        <span><%= scope.str %></span>
+      <% } else if (scope.hello) { %>
+        <span><%= scope.hello %></span>
+      <% } else { %>
+        <span><%= scope.what %></span>
+      <% } %>
+
+      <h3>world !</h3>
+      <% if (scope.str) { %>
+        <span><%= scope.str %></span>
+      <% } else if (scope.hello) { %>
+        <span><%= scope.hello %></span>
+      <% } else { %>
+        <span><%= scope.what %></span>
+      <% } %>
+    </div>
+  </script>
+  <script src="../cc-template.js"></script>
+  <script>
+    ;(function () {
+      var box1 = document.getElementById('J_Box_1');
+      var tBox1 = document.getElementById('T_Box_1');
+      var template = new cc.Template();
+
+      var str = tBox1.innerHTML;
+      var matches = template.match(str);
+      console.log(matches);
+
+      var match;
+      var sign;
+      var content;
+      var open = false;
+      var start = null;
+      var arrBlock = [];
+      var subMatches = [];
+      var strBlock;
+
+      for (var i = 0, ii = matches.length; i < ii; i++) {
+        match = matches[i];
+        sign = match[1][0];
+        content = match[1].slice(1).trim();
+
+        if (sign !== '=') {
+          // TODO open should be pushed into an array, and shifted if necessary
+          open = /\{$/.test(content);
+          // TODO for now, just parse the `block: if` sentence
+          if (open) {
+            if (!start) {
+              start = match.index;
+            }
+          } else {
+            arrBlock.push({
+              start: start,
+              end: match.index + match[0].length,
+            });
+            start = null;
+          }
+        }
+      }
+
+      var curIndex = 0;
+      var result = '';
+      for (var i = 0, ii = arrBlock.length; i < ii; i++) {
+        result += str.slice(curIndex, arrBlock[i].start)
+          + '<!--@parse:block:start@' + str.slice(arrBlock[i].start, arrBlock[i].end) + '@parse:block:end@-->';
+        curIndex = arrBlock[i].end;
+      }
+
+      var $temp = $(result);
+      console.log($temp[0].outerHTML);
+
+      console.log($('<span></span><span></span>'));
+
+      box1.innerHTML = result;
+    })();
+  </script>
+</body>
+</html>

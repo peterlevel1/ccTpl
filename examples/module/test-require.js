@@ -1,3 +1,3 @@
-var Template = require('../../dist/cc-template');
+var Template = require('../../cc-template');
 
 console.log(Template);

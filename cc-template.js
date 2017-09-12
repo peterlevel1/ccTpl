@@ -96,16 +96,27 @@
     return new RegExp(this.options.regexpHead + '([\\s\\S]+?)' + this.options.regexpTail, 'g');
   };
 
-  Template.prototype.compile = function (str) {
-    str = str.trim();
+  Template.prototype.match = function (str) {
     var reg = this._getTemplateRegExp();
+    var match;
+    var matches = [];
+
+    while (match = reg.exec(str)) {
+      matches.push(match);
+    }
+
+    return matches;
+  };
+
+  Template.prototype.compile = function (str) {
+    var matches = this.match(str);
     var match;
     var sign;
     var content;
     var ret = 'var _ret = "";\n';
     var lastIndex = 0;
 
-    while (match = reg.exec(str)) {
+    while (match = matches.shift()) {
       sign = match[1][0];
       content = match[1].slice(1).trim();
 
@@ -120,9 +131,6 @@
           break;
         case '!':
           ret += '_ret += ((' + content + ' || "") + "")' + ';\n';
-          break;
-        // TODO sub templates nested rendering
-        case '@':
           break;
         default:
           ret += content + '\n';

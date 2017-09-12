@@ -1,14 +1,14 @@
 {
   "name": "cc-template",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/peterlevel1/ccTpl.git"
   },
-  "main": "./dist/cc-template.js",
+  "main": "./cc-template.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir lib"
+    "build": "uglifyjs ./cc-template.js -m -c -o ./cc-template.min.js"
   },
   "author": "CongCong",
   "license": "MIT",
